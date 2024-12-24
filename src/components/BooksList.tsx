@@ -29,7 +29,7 @@ export function BookList({ books }: BookListProps) {
           <img
               src={book.imageUrl}
               alt={book.title}
-              className="w-full h-80 dark:text-white object-cover transition-transform duration-300 hover:scale-105"
+              className="w-full h-80 rounded-xl dark:text-white object-cover transition-transform duration-300 hover:scale-105"
             />
             <h3 className="text-xl font-semibold mt-6 mb-2">{book.title}</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-2">{book.author}</p>
@@ -41,7 +41,7 @@ export function BookList({ books }: BookListProps) {
                 rel="noopener noreferrer"
                 className="inline-block bg-violet-600 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-200"
               >
-                Buy Now
+                Read More
               </a>
             )}
           </div>

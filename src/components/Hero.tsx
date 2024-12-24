@@ -14,7 +14,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative bg-gradient-to-r from-purple-700 to-indigo-800 dark:from-purple-900 dark:to-indigo-900 text-white">
+    <section className="relative h-[90vh] bg-gradient-to-r from-purple-700 to-indigo-800 dark:from-purple-900 dark:to-indigo-900 text-white">
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 bg-black opacity-50"

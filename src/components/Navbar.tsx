@@ -24,7 +24,7 @@ const Navbar = () => {
           <>
             <button
               style={styles.button}
-              className="dark:bg-purple-700 dark:hover:bg-purple-600"
+              className="dark:bg-purple-700 dark:hover:bg-purple-600" 
               onClick={() => auth.signinRedirect()}
             >
               Sign in
@@ -67,6 +67,7 @@ const styles = {
   buttons: {
     display: "flex",
     gap: "1rem",
+    borderRadius: "50%"
   },
   button: {
     padding: "0.5rem 1rem",

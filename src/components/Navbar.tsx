@@ -1,83 +1,67 @@
+import React from 'react';
 import { useAuth } from "react-oidc-context";
 import DarkModeToggle from "./DarkModeToggle";
+import { Log } from 'oidc-client-ts';
 
 const Navbar = () => {
   const auth = useAuth();
+console.log(auth)
 
-  const signOutRedirect = () => {
+  const signOutRedirect = async () => {
     const clientId = "5dnet169d3bu5n2kn9t9nkvi64";
     const logoutUri = "http://localhost:5173";
-    const cognitoDomain =
-      "https://us-east-1hy9gdo4mq.auth.us-east-1.amazoncognito.com";
-    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
-      logoutUri
-    )}`;
+    const cognitoDomain = "https://us-east-1hy9gdo4mq.auth.us-east-1.amazoncognito.com";
+    
+    await auth.removeUser(); // Clear local auth state
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 
   return (
-    <nav style={styles.nav} className="bg-gray-100 dark:bg-gray-800">
-      <div style={styles.logo} className="text-gray-900 dark:text-white">
+    <nav className="flex justify-between items-center px-8 py-4 bg-white dark:bg-gray-800 shadow-md">
+      <div className="text-2xl font-bold text-gray-900 dark:text-white">
         Bibliofy
       </div>
-      <div style={styles.buttons}>
+      
+      <div className="flex gap-4 items-center">
         {!auth.isAuthenticated ? (
           <>
             <button
-              style={styles.button}
-              className="dark:bg-purple-700 dark:hover:bg-purple-600" 
               onClick={() => auth.signinRedirect()}
+              className="px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md transition-colors"
             >
-              Sign in
-            </button>
-            <button
-              style={styles.button}
-              className="dark:bg-purple-700 dark:hover:bg-purple-600"
-              onClick={() => auth.signinRedirect()}
-            >
-              Register
+              Get Started
             </button>
           </>
         ) : (
-          <button
-            style={styles.button}
-            className="dark:bg-purple-700 dark:hover:bg-purple-600"
-            onClick={() => auth.removeUser()}
-          >
-            Sign out
-          </button>
+          <>
+            <button 
+              onClick={signOutRedirect}
+              className="px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white rounded-md transition-colors"
+            >
+              Sign out
+            </button>
+            <button 
+              onClick={() => window.location.href = '/dashboard'} 
+              className="px-4 py-2 bg-purple-700 hover:bg-blue-600 text-white rounded-md transition-colors"
+            >
+              Dashboard
+            </button>
+            <button 
+          onClick={() => window.location.href = '/profile'}
+          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black rounded-md transition-colors"
+        >
+          <img 
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" 
+            alt="Profile" 
+            className="w-8 h-8 rounded-full"
+          />
+        </button>
+          </>
         )}
         <DarkModeToggle />
       </div>
     </nav>
   );
 };
-
-const styles = {
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "1rem 2rem",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-  },
-  logo: {
-    fontSize: "1.5rem",
-    fontWeight: "bold",
-  },
-  buttons: {
-    display: "flex",
-    gap: "1rem",
-    borderRadius: "50%"
-  },
-  button: {
-    padding: "0.5rem 1rem",
-    border: "none",
-    borderRadius: "4px",
-    backgroundColor: "#7E22CE",
-    color: "white",
-    cursor: "pointer",
-    transition: "background-color 0.3s",
-  },
-} as const;
 
 export default Navbar;

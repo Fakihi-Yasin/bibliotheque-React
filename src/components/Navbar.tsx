@@ -12,7 +12,7 @@ console.log(auth)
     const logoutUri = "http://localhost:5173";
     const cognitoDomain = "https://us-east-1hy9gdo4mq.auth.us-east-1.amazoncognito.com";
     
-    await auth.removeUser(); // Clear local auth state
+    await auth.removeUser();
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
   };
 

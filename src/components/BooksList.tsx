@@ -9,7 +9,7 @@ interface Book {
   description: string;
   buyUrl?: string;
   imageUrl: string;
-  available?: boolean; // Add availability property
+  available?: boolean;
 
 }
 
